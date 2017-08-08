@@ -4,9 +4,9 @@ const connectionString = process.env.DATABASE_URL || `postgres://localhost:5432/
 const db = pgp(connectionString)
 
 module.exports = class DataBaseGenericTableFunctions {
-  constructor(tableName, columnsForThePurposeOfAddingToTheTableAsAnArray) {
+  constructor(tableName, columnsForInsertingToTable) {
     this.table = tableName
-    this.columns = columnsForThePurposeOfAddingToTheTableAsAnArray
+    this.insertRow = columnsForInsertingToTable
   }
 
   errorHandler(SQLCommand, queryParams) {
@@ -20,17 +20,17 @@ module.exports = class DataBaseGenericTableFunctions {
 
   generate_$1$2etc() {
     let colmns = []
-    for (let i = 1; i <= this.columns.length; i++) {
+    for (let i = 1; i <= this.insertRow.length; i++) {
       colmns.push('$'+ i)
     }
     return colmns.join()
   } 
 
-  addRow(valuesAsAnArray) {
+  insert(valuesAsAnArray) {
     return this.errorHandler(`
       INSERT INTO 
         ${this.table} 
-        (${this.columns}) 
+        (${this.insertRow}) 
       VALUES 
         (${this.generate_$1$2etc()})
       RETURNING 
@@ -38,7 +38,7 @@ module.exports = class DataBaseGenericTableFunctions {
     )
   }
   
-  deleteByColumn(column, value) {
+  delete(column, value) {
     return this.errorHandler(`
       DELETE FROM 
         ${this.table} 
@@ -47,7 +47,7 @@ module.exports = class DataBaseGenericTableFunctions {
     )
   }
 
-  getAllRows() {
+  all() {
     return this.errorHandler(`
       SELECT 
         * 
@@ -59,7 +59,7 @@ module.exports = class DataBaseGenericTableFunctions {
     )
   }
 
-  getRowsByColumn(column, value) { 
+  findByColumn(column, value) { 
     return this.errorHandler(`
       SELECT 
         * 
@@ -73,7 +73,7 @@ module.exports = class DataBaseGenericTableFunctions {
     )
   }
 
-  getRowsByLimit(limit) {
+  limit(limit) {
     return this.errorHandler(`
       SELECT 
         * 
@@ -87,14 +87,14 @@ module.exports = class DataBaseGenericTableFunctions {
     )
   }
 
-  searchRowsByColumn(col1, col2, searchQuery) {
+  search(column, searchQuery) {
     return this.errorHandler(`
       SELECT
         *
       FROM
         ${this.table}
       WHERE
-        lower(${col1} || ${col2})
+        lower(${column})
       LIKE 
         $1
       `, `%${searchQuery.toLowerCase()}%`
