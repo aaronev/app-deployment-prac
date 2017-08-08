@@ -5,7 +5,11 @@
   "main": "server.js",
   "scripts": {
     "test": "npm t",
-    "start:dev": "nodemon server.js"
+    "start:dev": "nodemon server.js",
+    "db:create": "CREATEDB vinyl",
+    "db:drop": "DROPDB vinyl",
+    "db:schema": "psql -d vinyl < ./database/schema.sql",
+    "db:seed": "psql -d vinyl < ./database/seed.sql"
   },
   "repository": {
     "type": "git",
