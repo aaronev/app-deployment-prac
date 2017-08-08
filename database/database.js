@@ -33,8 +33,7 @@ module.exports = class DataBaseGenericTableFunctions {
         (${this.insertRow}) 
       VALUES 
         (${this.generate_$1$2etc()})
-      RETURNING 
-        *`, valuesAsAnArray
+      `, valuesAsAnArray
     )
   }
   
