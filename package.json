@@ -1,0 +1,19 @@
+{
+  "name": "app-deploy-heroku-prac",
+  "version": "1.0.0",
+  "description": "practicing how to deploy apps to heroku",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm t"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaronev/app-deployment-prac.git"
+  },
+  "author": "Aaron Villanueva",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aaronev/app-deployment-prac/issues"
+  },
+  "homepage": "https://github.com/aaronev/app-deployment-prac#readme"
+}
