@@ -4,7 +4,8 @@
   "description": "practicing how to deploy apps to heroku",
   "main": "server.js",
   "scripts": {
-    "test": "npm t"
+    "test": "npm t",
+    "start:dev": "nodemon server.js" 
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/aaronev/app-deployment-prac/issues"
   },
-  "homepage": "https://github.com/aaronev/app-deployment-prac#readme"
+  "homepage": "https://github.com/aaronev/app-deployment-prac#readme",
+  "dependencies": {
+    "express": "^4.15.4"
+  }
 }
