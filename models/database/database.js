@@ -4,9 +4,9 @@ const connectionString = process.env.DATABASE_URL || `postgres://localhost:5432/
 const db = pgp(connectionString)
 
 module.exports = class DataBaseGenericTableFunctions {
-  constructor(tableName, columnsForInsertingToTable) {
+  constructor(tableName, insertIntoColumns) {
     this.table = tableName
-    this.insertRow = columnsForInsertingToTable
+    this.insertIntoColumns = insertIntoColumns
   }
 
   errorHandler(SQLCommand, queryParams) {
@@ -30,13 +30,13 @@ module.exports = class DataBaseGenericTableFunctions {
     return this.errorHandler(`
       INSERT INTO 
         ${this.table} 
-        (${this.insertRow}) 
+        (${this.insertIntoColumns}) 
       VALUES 
         (${this.generate_$1$2etc()})
       `, valuesAsAnArray
     )
   }
-  
+
   delete(column, value) {
     return this.errorHandler(`
       DELETE FROM 
@@ -58,7 +58,7 @@ module.exports = class DataBaseGenericTableFunctions {
     )
   }
 
-  findByColumn(column, value) { 
+  find(column, value) { 
     return this.errorHandler(`
       SELECT 
         * 
@@ -83,20 +83,6 @@ module.exports = class DataBaseGenericTableFunctions {
       DESC
       LIMIT $1
       `, limit
-    )
-  }
-
-  search(column, searchQuery) {
-    return this.errorHandler(`
-      SELECT
-        *
-      FROM
-        ${this.table}
-      WHERE
-        lower(${column})
-      LIKE 
-        $1
-      `, `%${searchQuery.toLowerCase()}%`
     )
   }
 }
