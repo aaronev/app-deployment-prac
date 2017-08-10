@@ -16,7 +16,7 @@ reviews.findByUserID = (userID) =>
   DBReviews.find('user_id', userID)
 
 reviews.findByAlbumID = (albumID) => 
-  DBReviews.find('album_id', userID)
+  DBReviews.find('album_id', albumID)
 
 reviews.delete = (reviewID) => 
   DBReviews.delete('id', reviewID)

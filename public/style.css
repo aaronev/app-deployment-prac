@@ -1,0 +1,28 @@
+.center {
+  width: 100%;
+}
+
+.left {
+  text-align: center;
+  position: relative;
+  border: solid;
+}
+
+.navbar-brand{
+  position: relative;
+  float: left;
+  
+}
+.navbar-end {
+  position: relative;
+  padding: 10px;
+  text-align: center;
+  float: right;
+}
+
+.media {
+  border: solid;
+  width: 80%;
+  float: right;
+  margin: 10px;
+}
